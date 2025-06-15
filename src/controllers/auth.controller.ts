@@ -115,6 +115,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     const user = await prisma.user.findUnique({
       where: { email },
       include: {
+        EndUser: true, // Include EndUser relation
         Profile: true,
         Maintainer: true, // Include Maintainer relation
       },
@@ -153,6 +154,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         id: user.id,
         email: user.email,
         role: user.role,
+        endUserId: user.EndUser?.id, // Include endUserId in the response
         maintainerId: user.Maintainer?.id, // Include maintainerId in the response
       },
     });
