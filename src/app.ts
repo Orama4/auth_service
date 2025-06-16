@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/routes";
 import UsersRoutes from "./routes/usersRoutes";
+import { loggerMiddleware } from "./middleware/loggerMiddleware";
 
 
 dotenv.config();
@@ -11,6 +12,7 @@ const app = express();
 const PORT = parseInt(process.env.PORT || "3001", 10);
 
 app.use(express.json());
+app.use(loggerMiddleware);
 app.use(cors());
 
 // Routes
